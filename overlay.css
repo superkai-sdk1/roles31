@@ -1,0 +1,358 @@
+﻿@import url('https://fonts.googleapis.com/css2?family=Manrope:wght@400;700&display=swap');
+
+body {
+    margin: 0;
+    line-height: 0;
+    font-family: 'Manrope', sans-serif;
+    line-height: 1;
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    visibility: hidden;
+    opacity: 0;
+    transition: visibility 1.5s, opacity 1.5s linear;
+}
+
+body.visible {
+    visibility: visible;
+    opacity: 1;
+}
+
+footer {
+    position: absolute;
+    bottom: 10px;
+    width: 100%;
+    height: 20%;
+    display: flex;
+    justify-content: center;
+}
+
+.player {
+    margin: 0 0.625%;
+    width: 8.6%;
+    overflow: hidden;
+    position: relative;
+    border-radius: 5px;
+    box-shadow: none;
+    background-color: transparent;
+    transition: margin-top 1.5s, box-shadow 1.5s, transform 0.3s;
+    padding-bottom: 22px;
+}
+
+.player::after {
+    content: "";
+    display: block;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 22px;
+    background-color: #000;
+}
+
+.player.dead {
+    margin-top: 1.5%;
+}
+
+.speaker {
+    box-shadow: 0 2px 15px rgba(175, 82, 222, 0.9), 0 2px 7px rgba(175, 82, 222, 0.5);
+    transform: scale(1.1);
+}
+.photo {
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    height: 100%;
+    width: 100%;
+    background-repeat: no-repeat;
+    background-position: top;
+    background-size: cover;
+    box-shadow: none;
+    background-color: transparent;
+    transition: all 1s;
+}
+
+.dead .photo {
+    -webkit-filter: grayscale(100%);
+    filter: grayscale(100%);
+}
+.status {
+    position: absolute;
+    top: 5px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: auto;
+    height: auto;
+    visibility: hidden;
+    opacity: 0;
+    transition: visibility 1.5s, opacity 1.5s linear;
+    color: #ffffff;
+    font-size: 14px;
+    text-align: center;
+}
+.killed .status, .voted .status, .deleted .status {
+    visibility: visible;
+    opacity: 1;
+    background-color: transparent;
+    border-radius: 0;
+}
+.bg {
+    height: 100%;
+    width: 100%;
+    background-repeat: no-repeat;
+    background-position: top;
+    background-size: cover;
+    background-image: url("content/icon/red_bg.png");
+}
+.role {
+    height: 20px;
+    width: 20px;
+    position: absolute;
+    top: 2px;
+    left: 5px;
+    border-radius: 50%;
+    background-repeat: no-repeat;
+    background-position: top;
+    background-size: cover;
+    visibility: hidden;
+    opacity: 0;
+    transition: visibility 1.5s, opacity 1.5s linear;
+}
+.show-roles .sheriff .role {
+    visibility: visible;
+    opacity: 1;
+    background-color: rgb(0, 0, 0);
+    background-image: url("content/icon/loupe.png");
+}
+.show-roles .sheriff .bg {
+    background-image: url("content/icon/sher_bg.png");
+}
+.show-roles .don .role {
+    visibility: visible;
+    opacity: 1;
+    background-color: rgba(0, 0, 0, 0.8);
+    background-image: url("content/icon/hat.png");
+}
+.show-roles .don .bg {
+    background-image: url("content/icon/don_bg.png");
+}
+.show-roles .mafia .role {
+    visibility: visible;
+    opacity: 1;
+    background-color: rgba(0, 0, 0, 0.8);
+    background-image: url("content/icon/gun.png");
+}
+.show-roles .mafia .bg {
+    background-image: url("content/icon/black_bg.png");
+}
+.number {
+    position: absolute;
+    left: 6px;
+    bottom: 10px;
+    width: 15px;
+    height: 15px;
+    text-align: center;
+    background-color: transparent;
+    border: none;
+    color: #fff;
+    font-weight: 800;
+    font-size: 14px;
+    line-height: 25px;
+    transition: background-color 1.5s, border 1.5s;
+    z-index: 1000;
+}
+.show-roles .mafia .number,
+.show-roles .don .number {
+    color: #fff;}
+
+.nick {
+    position: absolute;
+    left: 50%;
+    bottom: 5px;
+    transform: translateX(-50%);
+    color: #fff;
+    font-size: 14px;
+    background-color: transparent;
+    text-align: center;
+    z-index: 1000;
+}
+.highlight {
+    border: 4px solid transparent;
+    border-radius: 10px;
+    animation: highlight-animation 3s linear infinite;
+}
+@keyframes highlight-animation {
+    0% {
+        border-color: rgba(175, 82, 222, 0);
+    }
+
+    25% {
+        border-color: rgba(175, 82, 222, 0.5);
+    }
+
+    50% {
+        border-color: rgba(175, 82, 222, 1);
+    }
+
+    75% {
+        border-color: rgba(175, 82, 222, 0.5);
+    }
+
+    100% {
+        border-color: rgba(175, 82, 222, 0);
+    }
+}
+@keyframes gradient-animation {
+    0% {
+        border-image: linear-gradient(45deg, rgba(175, 82, 222, 1), rgba(175, 82, 222, 0.5)) 1;
+    }
+
+    50% {
+        border-image: linear-gradient(45deg, rgba(82, 222, 175, 1), rgba(82, 222, 175, 0.5)) 1;
+    }
+
+    100% {
+        border-image: linear-gradient(45deg, rgba(175, 82, 222, 1), rgba(175, 82, 222, 0.5)) 1;
+    }
+}
+.game-info {
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    padding: 10px 20px;
+    background-color: rgb(31, 30, 31);
+    color: white;
+    font-size: 24px;
+    border-radius: 15px;
+    font-family: 'Manrope', sans-serif;
+    animation: speaker-animation 5s ease-in-out infinite;
+    transform-origin: center;
+}
+.game-phase-panel {
+    position: absolute;
+    top: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    padding: 10px 20px;
+    background-color: rgb(31, 30, 31);
+    color: white;
+    font-size: 24px;
+    border-radius: 20px;
+    font-family: 'Manrope', sans-serif;
+    animation: speaker-animation 5s ease-in-out infinite;
+    transform-origin: center;
+}
+
+.animate-phase {
+    animation: phase-animation 0.5s ease-in-out;
+}
+
+@keyframes phase-animation {
+    0% {
+        opacity: 0;
+        transform: translateY(-20px);
+    }
+    50% {
+        opacity: 1;
+        transform: translateY(10px);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes speaker-animation {
+    0% {
+        box-shadow: 0 2px 15px rgba(175, 82, 222, 0.9), 0 2px 7px rgba(175, 82, 222, 0.5);
+    }
+    50% {
+        box-shadow: 0 4px 25px rgba(175, 82, 222, 1), 0 4px 10px rgba(175, 82, 222, 0.7);
+    }
+    100% {
+        box-shadow: 0 2px 15px rgba(175, 82, 222, 0.9), 0 2px 7px rgba(175, 82, 222, 0.5);
+    }
+}
+.status-panel {
+    position: absolute;
+    top: -830px;
+    right: 20px;
+    padding: 10px 20px;
+    background-color: rgb(31, 30, 31);
+    color: white;
+    font-size: 24px;
+    border-radius: 15px;
+    font-family: 'Manrope', sans-serif;
+    animation: speaker-animation 5s ease-in-out infinite;
+    z-index: 10;
+}
+.status-line {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+.icon {
+    width: 24px;
+    height: 24px;
+    background-size: cover;
+    background-position: center;
+}
+
+.killed-icon {
+    background-image: url("content/icon/killed.png");
+}
+
+.voted-icon {
+    background-image: url("content/icon/voted.png");
+}
+.best-move {
+    position: absolute;
+    top: 25px;
+    right: 1px;
+    width: 20px;
+    text-align: center;
+    align-items: left;
+    background-color: rgba(0, 0, 0, 0.9);
+    color: white;
+    padding: 2px;
+    border-radius: 5px;
+    font-size: 18px;
+    z-index: 1000;
+    transition: opacity 0.3s ease-in-out;
+    margin-top: 1px;
+    border: 1px solid white;
+}
+
+.best-move-label {
+    font-size: 14px;
+    font-weight: bold;
+    margin-bottom: 5px;
+}
+
+.best-move-number {
+    margin: 5px 0;
+}
+.victory-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.8);
+    z-index: 10000;
+}
+
+.victory-player {
+    transform: scale(2);
+    margin: 10px;
+    transition: transform 0.3s, margin 0.3s;
+}
+
+.hidden {
+    display: none;
+}
